@@ -26,8 +26,7 @@ app.use(cors({
   credentials: true, // allow cookies
 }));
 
-// handle OPTIONS requests
-app.options("*", cors());
+
 
 
 connectDB();
