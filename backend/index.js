@@ -32,12 +32,8 @@ app.use('/api/user',userRouter)
 app.use('/api/notebook',noteBookRouter)
 app.use('/api/notes',noteRouter)
 
-// app.listen(PORT, () => {
-//   console.log(`✅ Server listening on http://localhost:${PORT}`);
-// });
-
-app.use((req, res) => {
-  res.status(404).json({ message: "Route not found", url: req.originalUrl });
+app.listen(PORT, () => {
+  console.log(`✅ Server listening on http://localhost:${PORT}`);
 });
 
 
