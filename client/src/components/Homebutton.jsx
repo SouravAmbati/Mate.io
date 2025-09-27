@@ -28,7 +28,7 @@ const Homebutton = () => {
           <button className="bg-[#C85454] h-[50px] w-[200px] flex justify-center items-center cursor-pointer rounded-md hover:bg-[#b94f4f] transition">
             <img
               className="w-[150px] ml-[5px]"
-              src="src/assets/Logo.png"
+              src="/public/Logo.png"
               alt="Logo"
             />
           </button>
