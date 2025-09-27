@@ -18,9 +18,10 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "*",
+  origin: "http://localhost:5173",
   credentials: true
 }));
+
 
 connectDB();
 // Test route
@@ -32,7 +33,9 @@ app.use('/api/user',userRouter)
 app.use('/api/notebook',noteBookRouter)
 app.use('/api/notes',noteRouter)
 
-
+app.listen(PORT, () => {
+  console.log(`✅ Server listening on http://localhost:${PORT}`);
+});
 
 
 export default app
