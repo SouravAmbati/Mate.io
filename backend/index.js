@@ -24,8 +24,6 @@ app.use(cookieParser());
 app.use(cors({
   origin: "https://mate-io-frontend.vercel.app", // frontend URL
   credentials: true, // allow cookies
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // explicitly allow methods
-  allowedHeaders: ["Content-Type", "Authorization"] // allow custom headers
 }));
 
 // handle OPTIONS requests
@@ -42,9 +40,9 @@ app.use('/api/user',userRouter)
 app.use('/api/notebook',noteBookRouter)
 app.use('/api/notes',noteRouter)
 
-// app.listen(PORT, () => {
-//   console.log(`✅ Server listening on http://localhost:${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(`✅ Server listening on http://localhost:${PORT}`);
+});
 
 
 export default app
