@@ -36,4 +36,9 @@ app.use('/api/notes',noteRouter)
 //   console.log(`✅ Server listening on http://localhost:${PORT}`);
 // });
 
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found", url: req.originalUrl });
+});
+
+
 export default app
