@@ -42,9 +42,9 @@ app.use('/api/user',userRouter)
 app.use('/api/notebook',noteBookRouter)
 app.use('/api/notes',noteRouter)
 
-app.listen(PORT, () => {
-  console.log(`✅ Server listening on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`✅ Server listening on http://localhost:${PORT}`);
+// });
 
 
 export default app
