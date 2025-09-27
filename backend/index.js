@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "*",
+  origin: "https://mate-io-frontend.vercel.app",
   credentials: true
 }));
 
