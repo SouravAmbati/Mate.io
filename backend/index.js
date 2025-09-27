@@ -17,10 +17,19 @@ const app = express();
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
+// app.use(cors({
+//   origin: "http://localhost:5173",
+//   credentials: true
+// }));
 app.use(cors({
-  origin: "https://mate-io-frontend.vercel.app",
-  credentials: true
+  origin: "https://mate-io-frontend.vercel.app", // frontend URL
+  credentials: true, // allow cookies
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // explicitly allow methods
+  allowedHeaders: ["Content-Type", "Authorization"] // allow custom headers
 }));
+
+// handle OPTIONS requests
+app.options("*", cors());
 
 
 connectDB();
