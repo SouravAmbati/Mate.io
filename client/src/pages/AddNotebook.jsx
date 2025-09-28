@@ -73,7 +73,7 @@ const AddNotebook = () => {
                 <FiPlus onClick={() => setDisplay(true)} className="text-white text-[35px] md:text-[60px] cursor-pointer" />
             </div>
 
-            {display ? '' : <div className='custom-scroll min-h-screen overflow-y-scroll pt-20 w-full text-white grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6  p-6 pb-24' >
+            {display ? '' : <div className='custom-scroll h-screen overflow-y-scroll pt-20 w-full text-white grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6  p-6' >
                 {notebooks.map((item, index) => (
                     <Link key={item._id} to={`/all-notes/${item._id}`}><Card  title={item.notebookName} /></Link>
                 ))}

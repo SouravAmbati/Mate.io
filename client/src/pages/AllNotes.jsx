@@ -157,7 +157,7 @@ const AllNotes = () => {
       )}
 
       {!display && (
-        <div className="custom-scroll h-screen overflow-y-scroll w-full text-white grid grid-cols-2 md:grid-cols-6 gap-4 p-4 pt-20">
+        <div className="custom-scroll h-screen overflow-y-scroll pt-20 w-full text-white grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6  p-6">
           {notes.map((item) => (
             <Link key={item._id} to={`/note/${item._id}`}>
               <Card title={item.topic} />
