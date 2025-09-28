@@ -236,6 +236,7 @@ const AddNotes = () => {
       });
     }
   }, []);
+  
 
   const handleGenerate = async () => {
     if (!topicName.trim()) {
