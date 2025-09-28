@@ -228,7 +228,7 @@ const AddNotes = () => {
       quillInstance.current = new Quill(editorRef.current, {
         theme: "snow",
         placeholder: "Write something...",
-        // readOnly: false,
+        readOnly: false,
       });
 
       quillInstance.current.on("text-change", () => {
@@ -236,7 +236,6 @@ const AddNotes = () => {
       });
     }
   }, []);
-  
 
   const handleGenerate = async () => {
     if (!topicName.trim()) {
