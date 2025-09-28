@@ -10,30 +10,22 @@ const ai = new GoogleGenAI({ apiKey: key });
 
 export async function generateNote(topic) {
   const prompt = `
-You are a helpful note generator. Generate notes about: ${topic} no markdown
+You are a helpful note generator. Generate notes about the topic: "${topic}" in proper HTML format.
 
-Follow these rules:
-1. The main topic title goes inside <h2>.
-3. If you do not have content for a section, write at least 2 placeholder points inside <ul> for lists, or "No data available" inside <p> for paragraphs.
-4. Normal descriptions go inside <p>.
-5. Bullet points must be inside <ul><li>…</li></ul>.
-6. Step-by-step instructions must be inside <ol><li>…</li></ol>.
-7. Never leave a section blank.
-8. Always output proper HTML, no invalid tags.
+Guidelines:
+1. Output only the notes related to the topic in HTML. Do not add extra sections or placeholders.
+2. Use <h2> for the main topic title if applicable.
+3. Use <h3> for subheadings if needed.
+4. Use <p> for normal text/paragraphs.
+5. Use <ul><li>…</li></ul> for bullet points.
+6. Use <ol><li>…</li></ol> for step-by-step instructions.
+7. Only include what is relevant to the topic. Do not invent unnecessary sections.
+8. Ensure proper HTML syntax with no invalid or unclosed tags.
+9. Output should be ready to render in a Quill editor without additional formatting.
 
-Template for AI to follow:
-
-<h2>${topic}</h2>
-
-<h3>Definition</h3>
-<p>Provide definition here...</p>
-
-<ul>
-  <li>Point 1</li>
-  <li>Point 2</li>
-</ul>
-
+Topic: ${topic}
 `;
+
 
 
 
