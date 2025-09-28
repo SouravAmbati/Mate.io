@@ -248,13 +248,19 @@ const AddNotes = () => {
 
     const res = await GenerateNote(topicName);
 
-    if (res.success) {
-      const generated = res.data;
-      quillInstance.current.root.innerHTML = generated;
-      setContent(generated);
-    } else {
-      alert(res.message);
-    }
+    // if (res.success) {
+    //   const generated = res.data;
+    //   quillInstance.current.root.innerHTML = generated;
+    //   setContent(generated);
+    // } else {
+    //   alert(res.message);
+    // }
+    if (generated) {
+    quillInstance.current.root.innerHTML = generated;
+    setContent(generated);
+  } else {
+    alert("Failed to generate notes");
+  }
 
     quillInstance.current.enable();
     setLoading(false); // hide loader

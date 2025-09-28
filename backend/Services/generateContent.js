@@ -10,21 +10,21 @@ const ai = new GoogleGenAI({ apiKey: key });
 
 export async function generateNote(topic) {
   const prompt = `
-You are a helpful note generator. Generate notes about the topic: "${topic}" in proper HTML format.
+Generate notes about the topic: "${topic}" in proper, clean HTML.
 
-Guidelines:
-1. Output only the notes related to the topic in HTML. Do not add extra sections or placeholders.
-2. Use <h2> for the main topic title if applicable.
-3. Use <h3> for subheadings if needed.
-4. Use <p> for normal text/paragraphs.
-5. Use <ul><li>…</li></ul> for bullet points.
-6. Use <ol><li>…</li></ol> for step-by-step instructions.
-7. Only include what is relevant to the topic. Do not invent unnecessary sections.
-8. Ensure proper HTML syntax with no invalid or unclosed tags.
-9. Output should be ready to render in a Quill editor without additional formatting.
+Rules:
+1. Output only relevant content for the topic. Do not create extra sections or placeholders.
+2. Use <h2> for main titles, <h3> for subheadings.
+3. Use <p> for paragraphs.
+4. Use <ul><li>…</li></ul> for bullet points.
+5. Use <ol><li>…</li></ol> for step-by-step instructions.
+6. Only generate valid, fully closed HTML tags.
+7. Do not include Markdown or code blocks.
+8. Output should be directly renderable in a Quill editor.
 
 Topic: ${topic}
 `;
+
 
 
 
@@ -40,11 +40,11 @@ Topic: ${topic}
 //  return response.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
 const response = await ai.models.generateContent({
-  model: "gemini-2.5-flash",
-  contents: [{ role: "user", parts: [{ text: prompt }] }],
-});
+    model: "gemini-2.5-flash",
+    contents: [{ role: "user", parts: [{ text: prompt }] }],
+  });
 
-return response.candidates?.[0]?.content?.parts?.[0]?.text || "";
+  return response.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "";
 }
 
 
