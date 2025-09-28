@@ -246,22 +246,15 @@ const AddNotes = () => {
     setLoading(true); // show loader
     quillInstance.current.disable(); // prevent typing during loading
 
-    // const res = await GenerateNote(topicName);
-    const generated = await GenerateNote(topicName);
+    const res = await GenerateNote(topicName);
 
-    // if (res.success) {
-    //   const generated = res.data;
-    //   quillInstance.current.root.innerHTML = generated;
-    //   setContent(generated);
-    // } else {
-    //   alert(res.message);
-    // }
-    if (generated) {
-    quillInstance.current.root.innerHTML = generated;
-    setContent(generated);
-  } else {
-    alert("Failed to generate notes");
-  }
+    if (res.success) {
+      const generated = res.data;
+      quillInstance.current.root.innerHTML = generated;
+      setContent(generated);
+    } else {
+      alert(res.message);
+    }
 
     quillInstance.current.enable();
     setLoading(false); // hide loader
