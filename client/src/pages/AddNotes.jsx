@@ -246,6 +246,7 @@ const AddNotes = () => {
     setLoading(true); // show loader
     quillInstance.current.disable(); // prevent typing during loading
 
+    // const res = await GenerateNote(topicName);
     const res = await GenerateNote(topicName);
 
     // if (res.success) {
