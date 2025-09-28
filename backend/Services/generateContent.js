@@ -11,29 +11,21 @@ const ai = new GoogleGenAI({ apiKey: key });
 export async function generateNote(topic) {
   const prompt = `
 Generate notes about the topic: "${topic}" in clean, valid HTML that can be rendered directly in a Quill editor.
+Use headings, paragraphs, and lists appropriately.
 `;
 
-
-
-
-
-
-
-
-
-//   const response = await ai.models.generateContent({
-//     model: "gemini-2.5-flash",
-//     contents: prompt,
-//   });
-
-//  return response.candidates?.[0]?.content?.parts?.[0]?.text || "";
-
-const response = await ai.models.generateContent({
+  // Correct way to call Gemini API
+  const response = await ai.models.generateContent({
     model: "gemini-2.5-flash",
     contents: [{ role: "user", parts: [{ text: prompt }] }],
   });
 
-  return response.text
+  // Gemini's response usually nests the content here:
+  const text = response?.candidates?.[0]?.content?.[0]?.text;
+
+  if (!text) throw new Error("No content received from Gemini API.");
+
+  return text;
 }
 
 
