@@ -23,7 +23,7 @@ app.use(cookieParser());
 // }));
 app.use(cors({
   // origin: "https://mate-io-frontend.vercel.app", // frontend URL
-  origin: "https://mate-io-frontend.vercel.app", // frontend URL
+  origin: "mate-io-frontend-git-main-souravs-projects-65.vercel.app", // frontend URL
   credentials: true, // allow cookies
 }));
 
