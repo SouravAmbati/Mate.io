@@ -26,7 +26,7 @@ app.use(cookieParser());
 //   credentials: true, // allow cookies
 // }));
 app.use(cors({
-  origin: "https://mate-io-frontend-qohu93kpq-souravs-projects-65.vercel.app",
+  origin: "https://mate-io-frontend.vercel.app",
   credentials: true // if you are sending cookies
 }));
 
