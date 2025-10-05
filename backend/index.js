@@ -22,7 +22,8 @@ app.use(cookieParser());
 //   credentials: true
 // }));
 app.use(cors({
-  origin: "https://mate-io-frontend.vercel.app", // frontend URL
+  // origin: "https://mate-io-frontend.vercel.app", // frontend URL
+  origin: "https://mate-io-frontend.vercel.app/", // frontend URL
   credentials: true, // allow cookies
 }));
 
