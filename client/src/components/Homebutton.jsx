@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const Homebutton = () => {
   const navigate = useNavigate();
@@ -7,6 +8,7 @@ const Homebutton = () => {
   const handleLogout = () => {
     // Clear token from localStorage
     localStorage.removeItem("token");
+    toast.success("successfully logged out")
 
     // Redirect to login page (or home)
     navigate("/auth");

@@ -307,6 +307,7 @@ import { NotebookContext } from "../../context/NotebookContext";
 import { FiArrowLeft, FiTrash2 } from "react-icons/fi";
 import axios from "axios";
 import "quill/dist/quill.snow.css";
+import { toast } from "react-toastify";
 
 const Note = () => {
   const { id } = useParams();
@@ -338,13 +339,13 @@ const Note = () => {
     try {
       const res = await axios.delete(`/api/notes/note/${noteId}`);
       if (res.data.success) {
-        alert("Note deleted successfully!");
+        toast.success("Note deleted successfully!");
         navigate(`/all-notes/${ID}`);
       } else {
-        alert(res.data.message || "Failed to delete note");
+        toast.error(res.data.message || "Failed to delete note");
       }
     } catch (error) {
-      alert(error.response?.data?.message || error.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
 

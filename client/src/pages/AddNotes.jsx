@@ -337,6 +337,7 @@ import "quill/dist/quill.snow.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { NotebookContext } from "../../context/NotebookContext";
 import { FiArrowLeft } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 const AddNotes = () => {
   const { id } = useParams();
@@ -365,7 +366,7 @@ const AddNotes = () => {
 
   const handleGenerate = async () => {
     if (!topicName.trim()) {
-      alert("Please enter a topic name before generating");
+      toast.success("Please enter a topic name before generating");
       return;
     }
     setLoading(true);
@@ -378,7 +379,8 @@ const AddNotes = () => {
       quillInstance.current.clipboard.dangerouslyPasteHTML(generated);
       setContent(generated);
     } else {
-      alert(res.message);
+      // alert(res.message);
+      toast.error(res.message)
     }
 
     quillInstance.current.enable();
@@ -387,7 +389,7 @@ const AddNotes = () => {
 
   const handleSubmit = async () => {
     if (!topicName.trim()) {
-      alert("Please enter a topic name");
+      toast.error("Please enter a topic name");
       return;
     }
     setSubmitting(true); // start loader
@@ -396,10 +398,10 @@ const AddNotes = () => {
     const res = await saveNote(id, content);
 
     if (res.success) {
-      alert("Note saved!");
+      toast.success("Note saved!");
       navigate(`/note/${id}`);
     } else {
-      alert(res.message);
+      toast.error(res.message);
     }
 
     quillInstance.current.enable();

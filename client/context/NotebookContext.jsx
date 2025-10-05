@@ -58,6 +58,7 @@ import axios from "axios";
 import { createContext, useContext } from "react";
 import { AuthContext } from "./AuthContext";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export const NotebookContext = createContext();
 

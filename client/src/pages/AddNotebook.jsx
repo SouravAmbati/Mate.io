@@ -93,6 +93,7 @@ import Card from '../components/Card';
 import { Link, useNavigate } from 'react-router-dom'
 import { NotebookContext } from '../../context/NotebookContext';
 import { AuthContext } from '../../context/AuthContext';
+import { toast } from 'react-toastify';
 
 const AddNotebook = () => {
     const [display, setDisplay] = useState(false);
@@ -110,11 +111,13 @@ const AddNotebook = () => {
                 setNotebooks([...notebooks, res.data]);
                 setName("");
                 setDisplay(false)
+                toast.success(res.message)
             } else {
-                alert(res.message);
+                // alert(res.message);
+                toast.error(res.message)
             }
         } else {
-            alert("Notebook name is required");
+            toast.error("Notebook name is required");
         }
     };
 

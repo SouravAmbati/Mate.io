@@ -7,6 +7,7 @@ import AllNotes from './pages/AllNotes'
 import Note from './pages/Note'
 import AuthForm from './pages/Register'
 import { AuthContext } from '../context/AuthContext'
+import {ToastContainer} from 'react-toastify'
 
 const App = () => {
   const ProtectedRoute = ({ children }) => {
@@ -21,6 +22,7 @@ const App = () => {
 };
   return (
     <div>
+      <ToastContainer/>
       <Routes>
         <Route path='/auth' element={<AuthForm/>}/>
         <Route path='/' element={<><Homebutton /></>} />

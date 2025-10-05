@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -29,8 +30,9 @@ const AuthForm = () => {
     }
     if (response.success) {
       navigate("/add-notebook"); // 👈 redirect after success
+      toast.success(response.message)
     } else {
-      alert(response.message);
+      toast.error(response.message);
     }
   };
 

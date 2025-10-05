@@ -306,6 +306,7 @@ import { FiPlus, FiX, FiArrowLeft, FiTrash2 } from "react-icons/fi";
 import Card from "../components/Card";
 import { NotebookContext } from "../../context/NotebookContext";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 let currentNotebookId = null;
 export const getNotebookId = () => currentNotebookId;
@@ -344,7 +345,7 @@ const AllNotes = () => {
       setName("");
       setDisplay(false);
     } else {
-      alert(res.message);
+      toast.error(res.message);
     }
   };
 
@@ -352,10 +353,10 @@ const AllNotes = () => {
     if (window.confirm("Are you sure you want to delete this notebook?")) {
       const res = await deleteNotebook(id);
       if (res.success) {
-        alert("Notebook deleted successfully");
+        toast.success("Notebook deleted successfully");
         navigate("/add-notebook");
       } else {
-        alert(res.message || "Failed to delete notebook");
+        toast.error(res.message || "Failed to delete notebook");
       }
     }
   };
