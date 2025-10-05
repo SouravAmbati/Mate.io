@@ -152,6 +152,18 @@ export const SpecificNote = async (req, res) => {
   }
 };
 
+//delete specific note
+export const deleteNote=async(req,res)=>{
+  try {
+    const {id}=req.params
+    await note.findByIdAndDelete({_id:id});
+    res.json({success:true,message:"Note Deleted"});
+  } catch (error) {
+    console.log(error.message);
+    return res.json({ success: false, message: error.message });
+  }
+}
+
 
 export const Note = async (req, res) => {
   try {

@@ -82,6 +82,23 @@ export const NotebookProvider = ({ children }) => {
     }
   };
 
+  const deleteNotebook=async(id)=>{
+    try {
+      const res=await axios.delete(`/api/notebook/notebooks/${id}`,authHeaders());
+      return res.data
+    } catch (error) {
+       return { success: false, message: error.response?.data?.message || error.message };
+    }
+  }
+
+  const deleteNote=async(id)=>{
+    try {
+      const res=await axios.delete(`/api/notes/note/${id}`,authHeaders());
+      return res.data
+    } catch (error) {
+      return { success: false, message: error.response?.data?.message || error.message };
+    }
+  }
 
 
 
@@ -178,7 +195,7 @@ export const NotebookProvider = ({ children }) => {
 
   return (
     <NotebookContext.Provider
-      value={{ createNotebook, getAllNotebooks, getNotebookById, getNotesByNotebookId, createNote, specificNote, saveNote, GenerateNote,ID,setId }}
+      value={{ createNotebook, getAllNotebooks, getNotebookById, getNotesByNotebookId, createNote, specificNote, saveNote, GenerateNote,ID,setId,deleteNotebook, deleteNote }}
     >
       {children}
     </NotebookContext.Provider>

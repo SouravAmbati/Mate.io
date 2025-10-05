@@ -44,6 +44,18 @@ export const createNotebook = async (req, res) => {
 //   }
 // };
 
+//delete NotebookWith specific id
+export const deleteNotebook=async(req,res)=>{
+  try {
+    const {id}=req.params
+    await notebook.findByIdAndDelete({_id:id});
+    res.json({success:true,message:"Book Deleted"});
+  } catch (error) {
+    console.log(error.message);
+    return res.json({ success: false, message: error.message });
+  }
+}
+
 export const GetAllNotebook = async (req, res) => {
   try {
     const userId = req.user._id; // user from protectRoute

@@ -375,7 +375,7 @@ const AddNotes = () => {
 
     if (res.success) {
       const generated = res.data;
-      quillInstance.current.root.innerHTML = generated;
+      quillInstance.current.clipboard.dangerouslyPasteHTML(generated);
       setContent(generated);
     } else {
       alert(res.message);
