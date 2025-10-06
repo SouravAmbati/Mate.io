@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import note from "../Models/note.model.js";
 import { generateNote } from "../Services/generateContent.js";
+import { decrypt, encrypt } from "../config/crypto.js";
 
 //create Note
 // export const createNote = async (req, res) => {
@@ -93,6 +94,7 @@ export const createNote = async (req, res) => {
     const newNote = new note({
       notebook: notebookid,
       topic: topicName,
+      note: encrypt("")
     });
 
     const savedNote = await newNote.save();
@@ -105,7 +107,8 @@ export const createNote = async (req, res) => {
 
 export const saveNote = async (req, res) => {
   try {
-    const { content } = req.body; // content input from user
+    const { content } = req.body;
+    const encrypted=encrypt(content) // content input from user
     const { id } = req.params;    // note id
 
     if (!content) {
@@ -115,7 +118,7 @@ export const saveNote = async (req, res) => {
     // Find the note by id and update its 'note' field
     const updatedNote = await note.findByIdAndUpdate(
       id,
-      { note: content },
+      { note: encrypted },
       { new: true } // return the updated document
     );
 
@@ -144,6 +147,7 @@ export const SpecificNote = async (req, res) => {
     if(!Notes){
       return res.json({success:false,message:"Notes not available"})
     }
+    
     //send the response
     res.json({success:true,data: Notes})
   } catch (error) {
@@ -176,8 +180,12 @@ export const Note = async (req, res) => {
     if (!Notes || Notes.length === 0) {
       return res.json({ success: false, message: "Notes not available" });
     }
+     const decryptedNotes = Notes.map((n) => ({
+      ...n._doc, // copy all fields
+      note: n.note ? decrypt(n.note) : "", // decrypt note content
+    }));
 
-    res.json({ success: true, data: Notes });
+    res.json({ success: true, data: decryptedNotes });
   } catch (error) {
     console.log(error.message);
     return res.json({ success: false, message: error.message });

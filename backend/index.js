@@ -17,18 +17,18 @@ const app = express();
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
-// app.use(cors({
-//   origin: "http://localhost:5173",
-//   credentials: true
-// }));
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+}));
 // app.use(cors({
 //   origin: "https://mate-io-frontend-qohu93kpq-souravs-projects-65.vercel.app", // frontend URL
 //   credentials: true, // allow cookies
 // }));
-app.use(cors({
-  origin: "https://mate-io-frontend.vercel.app",
-  credentials: true // if you are sending cookies
-}));
+// app.use(cors({
+//   origin: "https://mate-io-frontend.vercel.app",
+//   credentials: true // if you are sending cookies
+// }));
 
 
 connectDB();
