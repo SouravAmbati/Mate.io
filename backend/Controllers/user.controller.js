@@ -17,7 +17,7 @@ export const SignUp = async (req, res) => {
       return res.json({ success:false, message: "Email is invalid" });
     }
     // check if email exist
-    const userExist = await user.findOne({ email });
+    const userExist = await user.findOne({ email }).read("secondaryPreferred");;
     if (userExist) {
       return res.json({success:false, message: "User already exist" });
     }
@@ -56,7 +56,7 @@ export const Login = async (req, res) => {
     }
 
     // check if user exists
-    const userExist = await user.findOne({ email });
+    const userExist = await user.findOne({ email }).read("secondaryPreferred");;
     if (!userExist) {
       return res.json({ success: false, message: "User not found" });
     }

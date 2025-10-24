@@ -143,7 +143,7 @@ export const SpecificNote = async (req, res) => {
     //get userId from params
      const { id } = req.params;
     //findNote with that userId
-    const Notes=await note.find({notebook: id})
+    const Notes=await note.find({notebook: id}).read("secondaryPreferred");
     if(!Notes){
       return res.json({success:false,message:"Notes not available"})
     }
@@ -174,7 +174,7 @@ export const Note = async (req, res) => {
     const { id } = req.params;
 
     console.log("Fetching notes for notebook:", id); // log ID 
-    const Notes = await note.find({_id:id});
+    const Notes = await note.find({_id:id}).read("secondaryPreferred");;
     console.log("Notes found:", Notes); // log notes from DB
 
     if (!Notes || Notes.length === 0) {

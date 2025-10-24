@@ -60,7 +60,7 @@ export const GetAllNotebook = async (req, res) => {
   try {
     const userId = req.user._id; // user from protectRoute
 
-    const notebooks = await notebook.find({ user: userId });
+    const notebooks = await notebook.find({ user: userId }).read("secondaryPreferred");;
 
     if (!notebooks || notebooks.length === 0) {
       return res.json({ success: false, message: "No notebook created yet" });
@@ -79,7 +79,7 @@ export const SpecificNotebook = async (req, res) => {
     //get userId from params
     const userId=req.params;
     //findNotebook with that userId
-    const Notebook=await notebook.findOne(userId);
+    const Notebook=await notebook.findOne(userId).read("secondaryPreferred");;
     if(!Notebook){
       return res.json({success:false,message:"Notebook dont exist"});
     }
