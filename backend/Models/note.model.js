@@ -5,7 +5,7 @@ const noteSchema=new mongoose.Schema({
     topic: String,
     note: String,
 })
-
+noteSchema.index({notebook:1});
 const note=mongoose.models.note||mongoose.model('note',noteSchema);
 
 export default note

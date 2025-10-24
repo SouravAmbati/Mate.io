@@ -1,19 +1,17 @@
 import React from 'react'
+import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
+import { AuthContext } from '../../context/AuthContext';
+
+
 
 const Homebutton = () => {
   const navigate = useNavigate();
+  const {token}=useContext(AuthContext)
+  const {handleLogout}=useContext(AuthContext)
 
-  const handleLogout = () => {
-    // Clear token from localStorage
-    localStorage.removeItem("token");
-    toast.success("successfully logged out")
-
-    // Redirect to login page (or home)
-    navigate("/auth");
-  };
-
+  
   return (
     <div className="relative flex justify-center items-center h-screen bg-[#FFFFFF]">
       {/* Logout Button - Top Right */}

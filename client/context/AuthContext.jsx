@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react"
 import axios from "axios";
-
+import { jwtDecode } from "jwt-decode";
 const backendURL=import.meta.env.VITE_BACKEND_URL
 axios.defaults.baseURL=backendURL
 
@@ -18,6 +18,46 @@ export const AuthProvider=({children})=>{
         localStorage.removeItem("token")
     }
   },[token]);
+
+
+  const handleLogout = () => {
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem("token");
+    navigate("/auth");
+  };
+
+  // ✅ Check token validity and auto logout when expired
+  useEffect(() => {
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        const currentTime = Date.now() / 1000;
+
+        if (decoded.exp < currentTime) {
+          // Token already expired
+          handleLogout();
+        } else {
+          // Still valid → set timeout to auto logout
+          const remainingTime = (decoded.exp - currentTime) * 1000;
+          console.log("Token expires in:", remainingTime / 1000, "seconds");
+
+          const timer = setTimeout(() => {
+            console.log("Token expired, logging out...");
+            handleLogout();
+          }, remainingTime);
+
+          return () => clearTimeout(timer);
+        }
+      } catch (err) {
+        console.error("Error decoding token:", err);
+        handleLogout();
+      }
+    } else {
+      localStorage.removeItem("token");
+    }
+  }, [token]);
+
 
   const signup=async(formData)=>{
     try {
@@ -46,7 +86,7 @@ export const AuthProvider=({children})=>{
   };
 
   return (
-    <AuthContext.Provider value={{user,token,signup,login}}>
+    <AuthContext.Provider value={{user,token,signup,login,handleLogout}}>
         {children}
     </AuthContext.Provider>
   )
