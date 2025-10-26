@@ -388,10 +388,10 @@ const AddNotes = () => {
   };
 
   const handleSubmit = async () => {
-    if (!topicName.trim()) {
-      toast.error("Please enter a topic name");
-      return;
-    }
+    // if (!topicName.trim()) {
+    //   toast.error("Please enter a topic name");
+    //   return;
+    // }
     setSubmitting(true); // start loader
     quillInstance.current.disable();
 

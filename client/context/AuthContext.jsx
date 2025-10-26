@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react"
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 const backendURL=import.meta.env.VITE_BACKEND_URL
 axios.defaults.baseURL=backendURL
 
@@ -10,6 +11,8 @@ export const AuthContext=createContext();
 export const AuthProvider=({children})=>{
   const [user,setUser]=useState(null);
   const [token,setToken]=useState(localStorage.getItem("token")||null);
+  const [log,setLog]=useState(localStorage.getItem("token") ? "Logout" : "Login");
+  const navigate = useNavigate();
 
   useEffect(()=>{
     if(token){
@@ -21,13 +24,14 @@ export const AuthProvider=({children})=>{
 
 
   const handleLogout = () => {
+    setLog("Login")
     setUser(null);
     setToken(null);
     localStorage.removeItem("token");
     navigate("/auth");
   };
 
-  // ✅ Check token validity and auto logout when expired
+  
   useEffect(() => {
     if (token) {
       try {
@@ -38,7 +42,8 @@ export const AuthProvider=({children})=>{
           // Token already expired
           handleLogout();
         } else {
-          // Still valid → set timeout to auto logout
+          
+          setLog("Logout")
           const remainingTime = (decoded.exp - currentTime) * 1000;
           console.log("Token expires in:", remainingTime / 1000, "seconds");
 
@@ -86,7 +91,7 @@ export const AuthProvider=({children})=>{
   };
 
   return (
-    <AuthContext.Provider value={{user,token,signup,login,handleLogout}}>
+    <AuthContext.Provider value={{user,token,signup,login,handleLogout,log}}>
         {children}
     </AuthContext.Provider>
   )

@@ -7,9 +7,8 @@ import { AuthContext } from '../../context/AuthContext';
 
 
 const Homebutton = () => {
-  const navigate = useNavigate();
   const {token}=useContext(AuthContext)
-  const {handleLogout}=useContext(AuthContext)
+  const {handleLogout,log}=useContext(AuthContext)
 
   
   return (
@@ -19,7 +18,7 @@ const Homebutton = () => {
         onClick={handleLogout}
         className="absolute top-4 right-4  text-black h-[40px] w-[120px] rounded-md hover:text-[#b94f4f] transition cursor-pointer"
       >
-        Logout
+        {log}
       </button>
 
       {/* Main Notebook Button */}

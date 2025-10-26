@@ -88,7 +88,7 @@ const AuthForm = () => {
           {isLogin ? "Don’t have an account?" : "Already have an account?"}{" "}
           <button
             onClick={() => setIsLogin(!isLogin)}
-            className="text-[#C85454] font-semibold"
+            className="text-[#C85454] font-semibold cursor-pointer"
           >
             {isLogin ? "Sign Up" : "Login"}
           </button>
