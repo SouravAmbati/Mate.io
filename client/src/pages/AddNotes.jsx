@@ -341,7 +341,8 @@ import { toast } from "react-toastify";
 
 const AddNotes = () => {
   const { id } = useParams();
-  const { GenerateNote, saveNote } = useContext(NotebookContext);
+  //28/10/25
+  const { GenerateNote, saveNote, specificNote } = useContext(NotebookContext);
   const editorRef = useRef(null);
   const quillInstance = useRef(null);
   const [content, setContent] = useState("");
@@ -362,7 +363,21 @@ const AddNotes = () => {
         setContent(quillInstance.current.root.innerHTML);
       });
     }
-  }, []);
+    //28/10/25
+    const fetchNote = async () => {
+      const res = await specificNote(id);
+      if (res.success) {
+        // ✅ get the first note’s content
+        const content = res.data[0]?.note || "";
+        quillInstance.current.clipboard.dangerouslyPasteHTML(content);
+        
+      } else {
+        toast.error(res.message);
+      }
+    };
+
+    fetchNote();
+  }, [id]);
 
   const handleGenerate = async () => {
     if (!topicName.trim()) {
