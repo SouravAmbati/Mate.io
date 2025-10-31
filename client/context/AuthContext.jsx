@@ -64,34 +64,51 @@ export const AuthProvider=({children})=>{
   }, [token]);
 
 
-  const signup=async(formData)=>{
-    try {
-        const res=await axios.post("/api/user/signup",formData);
-        if(res.data.success){
-            setUser(res.data.userData);
-            setToken(res.data.token);
-        }
-        return res.data;
-    } catch (error) {
-        return {success:false,message:error.message}
-    }
-  }
+  // const signup=async(formData)=>{
+  //   try {
+  //       const res=await axios.post("/api/user/signup",formData);
+  //       if(res.data.success){
+  //           setUser(res.data.userData);
+  //           setToken(res.data.token);
+  //       }
+  //       return res.data;
+  //   } catch (error) {
+  //       return {success:false,message:error.message}
+  //   }
+  // }
 
-   const login = async (formData) => {
-    try {
-      const res = await axios.post("/api/user/login", formData);
-      if (res.data.success) {
-        setUser(res.data.userData);
-        setToken(res.data.token);
-      }
+  //  const login = async (formData) => {
+  //   try {
+  //     const res = await axios.post("/api/user/login", formData);
+  //     if (res.data.success) {
+  //       setUser(res.data.userData);
+  //       setToken(res.data.token);
+  //     }
+  //     return res.data;
+  //   } catch (error) {
+  //     return { success: false, message: error.message };
+  //   }
+  // };
+  // inside AuthProvider
+
+const googleLogin = async (token) => {
+  try {
+    const res = await axios.post("/api/user/google-auth", { token });
+    if (res.data.success) {
+      setUser(res.data.userData);
+      setToken(res.data.token);
       return res.data;
-    } catch (error) {
-      return { success: false, message: error.message };
+    } else {
+      return { success: false, message: res.data.message };
     }
-  };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
+};
+
 
   return (
-    <AuthContext.Provider value={{user,token,signup,login,handleLogout,log}}>
+    <AuthContext.Provider value={{user,token,googleLogin,handleLogout,log}}>
         {children}
     </AuthContext.Provider>
   )
