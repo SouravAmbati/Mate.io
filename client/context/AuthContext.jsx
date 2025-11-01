@@ -23,25 +23,13 @@ export const AuthProvider=({children})=>{
   },[token]);
 
 
-  // const handleLogout = () => {
-  //   setLog("Login")
-  //   setUser(null);
-  //   setToken(null);
-  //   localStorage.removeItem("token");
-  //   navigate("/auth");
-  // };
   const handleLogout = () => {
-  localStorage.clear();
-  sessionStorage.clear();
-  // if you use cookies
-  document.cookie.split(";").forEach(c => {
-    document.cookie = c
-      .replace(/^ +/, "")
-      .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-  });
-  window.location.reload(); // optional but ensures fresh state
-};
-
+    setLog("Login")
+    setUser(null);
+    setToken(null);
+    localStorage.removeItem("token");
+    navigate("/auth");
+  };
 
   
   useEffect(() => {
