@@ -3,7 +3,6 @@ import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthContext';
-import InstallButton from './InstallButton';
 
 
 
@@ -14,7 +13,6 @@ const Homebutton = () => {
   
   return (
     <div className="relative flex justify-center items-center h-screen bg-[#FFFFFF]">
-      
       {/* Logout Button - Top Right */}
       <button
         onClick={handleLogout}
@@ -34,7 +32,6 @@ const Homebutton = () => {
             />
           </button>
         </Link>
-        <InstallButton/>
       </div>
     </div>
   )
